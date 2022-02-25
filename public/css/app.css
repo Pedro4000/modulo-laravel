@@ -1,0 +1,30 @@
+body {
+  font-family: 'DIN', Fallback, sans-serif !important;
+  margin: 0;
+}
+
+}
+a {
+  /* blue colors for links too */
+  text-decoration: inherit;
+  /* no underline */
+  text-decoration: none ;
+  color: inherit;
+}
+a:hover {
+  color: inherit;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100%;
+}
+img {
+  max-height: 100%;
+  height: auto;
+}
