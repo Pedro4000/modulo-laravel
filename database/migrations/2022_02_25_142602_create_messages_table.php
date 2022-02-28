@@ -17,10 +17,10 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->text('content');
             $table->unsignedBigInteger('topic_id');
-            $table->unsignedBigInteger('utilisateur_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('topic_id')->references('id')->on('topics');
-            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs');
+            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 
