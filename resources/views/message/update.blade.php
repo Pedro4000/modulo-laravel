@@ -5,7 +5,7 @@
 @extends('layout.layout')
 
 @section('titre')
-login
+modifier un message
 @endsection
 
 @section('sidebar')
@@ -20,42 +20,34 @@ login
 @section('content')
 
     <div class="main align-items-center min-vh-100">
-
-        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-            @if (Session::has($msg)) 
-            
-                <div class="alert alert-{{ $msg }}" role="alert">
-                    {{ Session::get($msg) }} <a href="#!" class="close" data-dismiss="alert" aria-label="close"><i class="fas fa-times"></i></a>
-                </div>
-            @endif
-        @endforeach
-            
-        <h2></h2>
-        <div class="w-25 m-auto">
-            <form class="needs-validation p-3 mt-5 border" novalidate method="POST" action="{{ route('login.attempt') }}">
+        <div class="w-75 m-auto">
+            <form class="needs-validation p-3 mt-5 border" novalidate method="POST" action="{{ route('message.store') }}">
             @csrf
+
                 <div class="form-row">
-                    <div class="w-100 mb-3">
-                        <label for="validationCustom03">Email</label>
-                        <input type="text" class="form-control" id="validationCustom03" placeholder="Email" required name="email">
+                    <div class="col-md-13 mb-3">
+                        <input type="" class="d-none" value="{{ $message->id }}">
+                        <label for="validationCustom03">Sujet</label>
+                        <select name="topic" id="topic" class="form-select" readonly>
+                        <option value="{{ $topic->id }}">{{ $topic->description }}</option>
+                        </select>
                         <div class="invalid-feedback">
-                            Email incorrecte
+                            Sujet
                         </div>
                     </div>
-
                 </div>
-                <div class="form-row">
 
+                <div class="form-row">
                     <div class="w-100 mb-3">
-                        <label for="validationCustom04">Mot de passe</label>
-                        <input type="password" class="form-control" id="validationCustom04" required name="password">
+                        <label for="validationCustom04">Contenu</label>
+                        <textarea type="content" class="form-control" id="validationCustom04" required name="content" col="10"></textarea>
                         <div class="invalid-feedback">
-                            Mdp incorrect
+                            {{ $message->contenu }}
                         </div>
                     </div>
                 </div>
                 
-                <button class="btn btn-primary" type="submit">Se connecter</button>
+                <button class="btn btn-primary" type="submit">Envoyer</button>
             </form>
         </div>
     </div>

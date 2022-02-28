@@ -20,11 +20,16 @@ message
 @section('content')
 
     <div class="main align-items-center min-vh-100">
-        <div class="w-75 m-auto mt-4">
-            <h6 class="py-2 px-4 border"> Sujet : {{ $message->topic->title }}</h6>
-            <p class="mt-2">{{ $message->content }}</p>
-            
-        </div>
+        <form action="{{ route('message.update') }}" method="post">
+            @csrf
+            <div class="w-75 m-auto mt-4">
+                <h6 class="py-2 px-4 border"> Sujet : {{ $message->topic->title }}</h6>
+                <input class="d-none" name="messageId" value="{{ $message->id }}">
+                <label for="content"></label>
+                <textarea class="mt-2 w-100 form-control" name="content" id="content" rows="15" >{{ $message->content }}</textarea>
+            <button type="submit" class="btn btn-primary mt-1">Enregister</button>
+            </div>
+        </form>
     </div>
 
     

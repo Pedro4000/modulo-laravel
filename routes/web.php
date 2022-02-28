@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TopicController;
+use App\Http\Middleware\IsConnected;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,40 +27,48 @@ Route::get('/register', [HomeController::class, 'register'])
 Route::post('/register_store', [UtilisateurController::class, 'store'])
     ->name('register.store');
 
-Route::post('/login_attempt', [UtilisateurController::class, 'store'])
+Route::post('/login_attempt', [UtilisateurController::class, 'loginAttemps'])
     ->name('login.attempt');
 
 Route::get('/login', [UtilisateurController::class, 'login'])
     ->name('login');
 
 
-Route::get('/message_create', [MessageController::class, 'create'])
-    ->name('message.create');
+    
+Route::middleware([IsConnected::class])->group(function () {
+        
+    Route::get('/logout', [UtilisateurController::class, 'logout'])
+    ->name('logout');
 
-Route::post('/message_store', [MessageController::class, 'store'])
-    ->name('message.store');
+    Route::get('/message_create', [MessageController::class, 'create'])
+        ->name('message.create');
 
-Route::get('/message_read/{messageId}', [MessageController::class, 'read'])
-    ->name('message.read');
+    Route::post('/message_store', [MessageController::class, 'store'])
+        ->name('message.store');
 
-Route::post('/message_update', [MessageController::class, 'update'])
-    ->name('message.update');
+    Route::get('/message_read/{messageId}', [MessageController::class, 'read'])
+        ->name('message.read');
 
-Route::post('/message_delete', [MessageController::class, 'delete'])
-    ->name('message.delete');
+    Route::post('/message_update', [MessageController::class, 'update'])
+        ->name('message.update');
+
+    Route::post('/message_delete', [MessageController::class, 'delete'])
+        ->name('message.delete');
 
 
-Route::get('/topic_create', [TopicController::class, 'create'])
-    ->name('topic.create');
+    Route::get('/topic_create', [TopicController::class, 'create'])
+        ->name('topic.create');
 
-Route::post('/topic_store', [TopicController::class, 'store'])
-    ->name('topic.store');
+    Route::post('/topic_store', [TopicController::class, 'store'])
+        ->name('topic.store');
 
-Route::get('/topic_read/{topicId}', [TopicController::class, 'read'])
-    ->name('topic.read');
+    Route::get('/topic_read/{topicId}', [TopicController::class, 'read'])
+        ->name('topic.read');
 
-Route::post('/topic_update', [TopicController::class, 'update'])
-    ->name('topic.update');
+    Route::post('/topic_update', [TopicController::class, 'update'])
+        ->name('topic.update');
 
-Route::post('/topic_delete', [TopicController::class, 'delete'])
-    ->name('topic.delete');
+    Route::post('/topic_delete', [TopicController::class, 'delete'])
+        ->name('topic.delete');
+
+});

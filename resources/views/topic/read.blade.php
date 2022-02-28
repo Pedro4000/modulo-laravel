@@ -25,12 +25,22 @@ Page sujet
             <p class="mt-2">{{ $topic->description }}</p>
             @foreach( $topic->messages as $message)
                 <div class="border mt-4 p-2">
-                    <h6>    
+                    <h6 class="p2">    
                         {{ $message->title }}
                     </h6>
                     <p> {{ $message->content }}</p>
                     <p>Message de : {{ $message->user->nickname }}</p>
-                    <p>Crée le : {{ $message->created_at->format('d-m-Y') }}</p>
+                    <div class="d-flex justify-content-between">
+                        <span>Crée le : {{ $message->created_at->format('d-m-Y') }}</span>
+                        <span class="d-flex">
+                            <a class="btn btn-outline-success" href="{{ route('message.read', [ 'messageId' => $message->id ]) }}">Modifier</a>
+                            <form action="{{ route('message.delete') }}" method="post" class="ml-1">
+                                @csrf
+                                <input name="messageId" id="messageId" class="d-none" value="{{ $message->id }}">
+                                <button class="btn btn-outline-danger"href="{{ route('message.delete', [ 'messageId' => $message->id ]) }}">Supprimer</a>
+                            </form>
+                        </span>
+                    </div>
                 </div>
             @endforeach
         </div>

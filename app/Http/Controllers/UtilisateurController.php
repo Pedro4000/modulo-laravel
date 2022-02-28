@@ -16,19 +16,35 @@ class UtilisateurController extends Controller
         $user->lastName = $request->get('lastName');
         $user->nickName = $request->get('nickName');
         $user->email = $request->get('email');
-        $user->password = Hash::make($request->newPassword);
-
+        $user->password = Hash::make($request->get('password'));
         $user->save();
+
         return redirect()->route('home');
     }
 
-    public function register(Request $request) {
+    public function logout(Request $request) {
 
+        $request->session()->forget('user');
+        
+        return redirect()->route('home');
     }
 
 
     public function login(Request $request) {
 
         return view('login');
+    }
+
+    public function loginAttemps(Request $request) {
+
+        
+        $user = User::where('email', $request->get('email'))->get()->first();
+        
+        if (isset($user) && Hash::check($request->get('password'), $user->password)) {
+            $request->session()->put('user', $user);
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('login')->with('danger', 'Mauvais mdp');
+        }
     }
 }

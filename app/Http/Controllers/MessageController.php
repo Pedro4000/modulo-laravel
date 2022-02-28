@@ -9,8 +9,8 @@ use App\Http\Controllers\Controller;
 class MessageController extends Controller
 {
 
-    public function create(Request $request) {
-
+    public function create(Request $request) 
+    {
         $topics = Topic::get();
 
         return view('message.create', [
@@ -18,8 +18,8 @@ class MessageController extends Controller
         ]);
     }
 
-    public function read(Request $request, $messageId) {
-
+    public function read(Request $request, $messageId) 
+    {
         $message = Message::find($messageId);
 
         return view('message.read', [
@@ -27,8 +27,8 @@ class MessageController extends Controller
         ]);
     }   
 
-    public function store(Request $request) {
-        
+    public function store(Request $request) 
+    {    
         $message = new Message();
         $message->content = $request->get('content');
         $message->topic_id = $request->get('topic');
@@ -38,11 +38,20 @@ class MessageController extends Controller
         return redirect()->route('home');
     }
 
-    public function update(Request $request) {
+    public function update(Request $request) 
+    {
+        $message = Message::find($request->get('messageId'));
+        $message->content = $request->get('content');
+        $message->save();
+
+        return redirect()->route('topic.read', [ 'topicId' => $message->topic->id]);
 
     }
-
     public function delete(Request $request) {
 
+        $message = Message::find($request->get('messageId'));
+        $message->delete();
+
+        return redirect()->route('topic.read', [ 'topicId' => $message->topic->id]);
     }
 }

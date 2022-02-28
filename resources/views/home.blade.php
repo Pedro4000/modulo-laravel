@@ -25,29 +25,29 @@ home
                 <h5>Test Modulo</h5>
                 <p class="text-center">On va dans ce test créer une sorte de blog assez simple avec utilisateurs, topics et messages</p>
                 <p>On peut naviguer grâce à la navbar</p>
-            </div>
-
-            <table class="table mt-4">
-                <thead>
+            </div>            
+            @if (Session::has('user'))
+              <table class="table mt-4">
+                  <thead>
+                    <tr>
+                      <th scope="col">Titre</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Crée par</th>
+                      <th scope="col">Crée le</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($topics as $topic)
                   <tr>
-                    <th scope="col">Titre</th>
-                    <th scope="col">description</th>
-                    <th scope="col">crée par</th>
-                    <th scope="col">Crée le</th>
+                    <td><a href="{{ route('topic.read', [ 'topicId' => $topic->id ]) }}">{{ $topic->title }}</td></a>
+                    <td scope="row">{{ Str::limit($topic->description,60) }}</td>
+                    <td>{{ $topic->user->nickname }}</td>
+                    <td>{{ $topic->created_at->format('d-m-Y') }}</td>
                   </tr>
-                </thead>
-                <tbody>
-                @foreach($topics as $topic)
-                <tr>
-                  <td><a href="{{ route('topic.read', [ 'topicId' => $topic->id ]) }}">{{ $topic->title }}</td></a>
-                  <td scope="row">{{ Str::limit($topic->description,60) }}</td>
-                  <td>{{ $topic->user->nickname }}</td>
-                  <td>{{ $topic->created_at->format('d-m-Y') }}</td>
-                </tr>
-                @endforeach
-                </tbody>
-              </table>
-
+                  @endforeach
+                  </tbody>
+                </table>
+              @endif
         </div>
 
 </div>

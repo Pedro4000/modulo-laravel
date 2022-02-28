@@ -26,6 +26,11 @@ class TopicController extends Controller
 
     public function store(Request $request) {
 
+        /*
+        $user= User::find(1);
+        $request->session()->put('user', $user);
+        */
+
         $topic = new Topic();
         $topic->title = $request->get('title');
         $topic->description = $request->get('description');
@@ -36,7 +41,14 @@ class TopicController extends Controller
         return redirect()->route('home');
     }
 
-    public function update(Request $request) {
+    public function update(Request $request, int $topicId) {
+
+        $topic = Message::find($topicId);
+
+
+        return view('topic.update', [
+            'topic' => $topic,
+        ]);
 
     }
 
