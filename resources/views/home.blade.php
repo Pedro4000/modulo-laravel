@@ -5,7 +5,7 @@
 @extends('layout.layout')
 
 @section('titre')
-poser une éclipse
+home
 @endsection
 
 @section('sidebar')
@@ -26,7 +26,30 @@ poser une éclipse
                 <p class="text-center">On va dans ce test créer une sorte de blog assez simple avec utilisateurs, topics et messages</p>
                 <p>On peut naviguer grâce à la navbar</p>
             </div>
+
+            <table class="table mt-4">
+                <thead>
+                  <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">description</th>
+                    <th scope="col">crée par</th>
+                    <th scope="col">Crée le</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach($topics as $topic)
+                <tr>
+                  <td><a href="{{ route('topic.read', [ 'topicId' => $topic->id ]) }}">{{ $topic->title }}</td></a>
+                  <td scope="row">{{ Str::limit($topic->description,60) }}</td>
+                  <td>{{ $topic->user->nickname }}</td>
+                  <td>{{ $topic->created_at->format('d-m-Y') }}</td>
+                </tr>
+                @endforeach
+                </tbody>
+              </table>
+
         </div>
+
 </div>
 
 @endsection

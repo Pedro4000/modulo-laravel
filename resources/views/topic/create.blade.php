@@ -5,7 +5,7 @@
 @extends('layout.layout')
 
 @section('titre')
-logout
+login
 @endsection
 
 @section('sidebar')
@@ -21,39 +21,32 @@ logout
 
     <div class="main align-items-center min-vh-100">
         <div class="w-75 m-auto">
-            <form class="needs-validation p-3 mt-5 border" novalidate method="POST" action="{{ route('login.attemp') }}">
+            <form class="needs-validation p-3 mt-5 border" novalidate method="POST" action="{{ route('topic.store') }}">
             @csrf
 
 
                 <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom03">Email</label>
-                        <input type="text" class="form-control" id="validationCustom03" placeholder="Email" required name="email">
+                    <div class="mb-3 w-100">
+                        <label for="title">Titre</label>
+                        <input type="text" name="title" id="title" class="form-control ">                       
                         <div class="invalid-feedback">
-                            Email incorrecte
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Mot de passe</label>
-                        <input type="password" class="form-control" id="validationCustom04" required name="password">
-                        <div class="invalid-feedback">
-                            Mdp incorrect
+                            Titre
                         </div>
                     </div>
 
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                    <label class="form-check-label" for="invalidCheck">
-                        Termes et conditions
-                    </label>
-                    <div class="invalid-feedback">
-                        Vous devez valider.
+                <div class="form-row">
+
+                    <div class="w-100 mb-3">
+                        <label for="descrition">Description</label>
+                        <textarea class="form-control" id="description" required name="description" rows="15"></textarea>
+                        <div class="invalid-feedback">
+                            Description
+                        </div>
                     </div>
-                    </div>
+
                 </div>
+                
                 <button class="btn btn-primary" type="submit">Envoyer</button>
             </form>
         </div>

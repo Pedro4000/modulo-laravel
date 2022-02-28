@@ -5,7 +5,7 @@
 @extends('layout.layout')
 
 @section('titre')
-login
+message
 @endsection
 
 @section('sidebar')
@@ -20,35 +20,10 @@ login
 @section('content')
 
     <div class="main align-items-center min-vh-100">
-        <div class="w-25 m-auto">
-            <form class="needs-validation p-3 mt-5 border" novalidate method="POST" action="{{ route('login.attempt') }}">
-            @csrf
-
-
-                <div class="form-row">
-                    <div class="w-100 mb-3">
-                        <label for="validationCustom03">Email</label>
-                        <input type="text" class="form-control" id="validationCustom03" placeholder="Email" required name="email">
-                        <div class="invalid-feedback">
-                            Email incorrecte
-                        </div>
-                    </div>
-
-                </div>
-                <div class="form-row">
-
-                    <div class="w-100 mb-3">
-                        <label for="validationCustom04">Mot de passe</label>
-                        <input type="password" class="form-control" id="validationCustom04" required name="password">
-                        <div class="invalid-feedback">
-                            Mdp incorrect
-                        </div>
-                    </div>
-
-                </div>
-                
-                <button class="btn btn-primary" type="submit">Se connecter</button>
-            </form>
+        <div class="w-75 m-auto mt-4">
+            <h6 class="py-2 px-4 border"> Sujet : {{ $message->topic->title }}</h6>
+            <p class="mt-2">{{ $message->content }}</p>
+            
         </div>
     </div>
 

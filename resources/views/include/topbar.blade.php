@@ -13,5 +13,11 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('register') }}">Register</a>
         </li>
+        <li class="nav-item ml-1">
+            <a class="nav-link" href="{{ route('message.create') }}">ajouter un message</a>
+        </li>
+        <li class="nav-item ml-1">
+            <a class="nav-link" href="{{ route('topic.create') }}">ajouter un sujet</a>
+        </li>
     </ul>
 </div>

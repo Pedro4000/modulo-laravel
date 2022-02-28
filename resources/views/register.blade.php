@@ -5,7 +5,7 @@
 @extends('layout.layout')
 
 @section('titre')
-poser une éclipse
+register
 @endsection
 
 @section('sidebar')
@@ -35,7 +35,7 @@ poser une éclipse
 
                     <div class="col-md-4 mb-3">
                         <label for="validationCustom02">Nom</label>
-                        <input type="text" class="form-control" id="validationCustom02" placeholder="Nom" value="" name="lastname" required>
+                        <input type="text" class="form-control" id="validationCustom02" placeholder="Nom" value="" name="lastName" required>
                         <div class="valid-feedback">
                             ok
                         </div>
@@ -47,7 +47,7 @@ poser une éclipse
                             <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupPrepend">@</span>
                             </div>
-                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Pseudo" aria-describedby="inputGroupPrepend" required name="nickname">
+                            <input type="text" class="form-control" id="validationCustomUsername" placeholder="Pseudo" aria-describedby="inputGroupPrepend" required name="nickName">
                             <div class="invalid-feedback">
                             Choisissez un pseudo correct
                             </div>
